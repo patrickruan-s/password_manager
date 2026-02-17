@@ -1,0 +1,25 @@
+<div class="entries">
+    <h1>Entries</h1>
+    <div id="dashboard" class="card shadow-sm">
+    <% if @entries.any? %>
+        <div class="row">
+            <div class="entries-card">
+                <div class="entries-card__sidebar">
+                    <%= render(@entries) %>
+                </div>
+                <div class="entries-card__main">
+                    <%= @entries.first.name %>
+                </div>
+            </div>
+        </div>
+    <% else %>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h2>No Entries Yet. <%= link_to "Add Entry", new_entry_path, class: 'btn btn-secondary' %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+    </div>
+</div>
