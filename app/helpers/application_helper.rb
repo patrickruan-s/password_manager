@@ -4,4 +4,8 @@ module ApplicationHelper
             image_tag("logo.png", class: "logo-pic") + " SafePass"
         end
     end
+
+    def format_time(time)
+        time.strftime("%m/%d/%Y, %I:%M %p")
+    end
 end

@@ -2,6 +2,7 @@ class EntriesController < ApplicationController
     def index
         if current_user
             @entries = current_user.entries
+            @main_entry = current_user.entries.first
         else
             @entries = []
         end

@@ -1,25 +1,36 @@
-<div class="entries">
-    <h1>Entries</h1>
-    <div id="dashboard" class="card shadow-sm">
-    <% if @entries.any? %>
-        <div class="row">
-            <div class="entries-card">
-                <div class="entries-card__sidebar">
-                    <%= render(@entries) %>
-                </div>
-                <div class="entries-card__main">
-                    <%= @entries.first.name %>
-                </div>
+<% if current_user %>
+    <div class="entries">
+        <h1>Entries</h1>
+        <div class="float-right row">
+            <div class="entries-actions card">
+                <%= link_to('New Entry', new_entry_path, class: 'btn btn-primary', data: {turbo_frame: 'main-dashboard'}) %>
             </div>
-        </div>
-    <% else %>
-        <div class="row">
-            <div class="card">
-                <div class="card-body">
-                    <h2>No Entries Yet. <%= link_to "Add Entry", new_entry_path, class: 'btn btn-secondary' %>
+         </div>
+        <div id="dashboard" class="card shadow-sm">
+            <% if @entries.any? %>
+                <div class="row">
+                    <div class="entries-card">
+                        <div class="entries-card__sidebar">
+                            <%= render(@entries) %>
+                        </div>
+                        <div class="entries-card__main">
+                            <%= turbo_frame_tag('main-dashboard') do %>
+                                <%= render(partial: 'entries/main', locals: { entry: @main_entry }) %>
+                            <% end %>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            <% else %>
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>No Entries Yet. <%= link_to "Add Entry", new_entry_path, class: 'btn btn-secondary' %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
         </div>
-    <% end %>
     </div>
-</div>
+<% else %>
+    <%= render('entries/homepage') %>
+<% end %>
