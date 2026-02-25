@@ -2,7 +2,7 @@
     <div class="entry-favicon">
         <%= image_tag("https://www.google.com/s2/favicons?domain=#{entry.url}&sz-32", alt: entry.name) %>
     </div>
-    <div>
+    <div class="flex-grow-1">
         <%= yield %>
     </div>
 </div>

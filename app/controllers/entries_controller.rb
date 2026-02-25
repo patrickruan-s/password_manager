@@ -12,6 +12,16 @@ class EntriesController < ApplicationController
         @entry = Entry.new
     end
 
+    def destroy
+        @entry = Entry.find_by(id: params[:id])
+        @entry.destroy
+        flash.now[:notice] = "Entry has been deleted"
+        respond_to do |format|
+            format.html { redirect_to root_path }
+            format.turbo_stream {}
+        end
+    end
+
     def create
         @entry = current_user.entries.new(entry_params)
 
@@ -33,6 +43,6 @@ class EntriesController < ApplicationController
     private
 
         def entry_params
-            params.expect(entry: [:name, :url, :username, :password])
+            params.require(:entry).permit(:name, :url, :username, :password)
         end
 end

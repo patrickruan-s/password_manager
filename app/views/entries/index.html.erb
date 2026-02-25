@@ -17,7 +17,9 @@
                         </div>
                         <div class="entries-card__main">
                             <%= turbo_frame_tag('main-dashboard') do %>
-                                <%= render(partial: 'entries/main', locals: { entry: @main_entry }) %>
+                                <% if @main_entry %>
+                                    <%= render(partial: 'entries/main', locals: { entry: @main_entry }) %>
+                                <% end %>
                             <% end %>
                         </div>
                     </div>
@@ -34,5 +36,5 @@
         </div>
     </div>
 <% else %>
-    <%= render('entries/homepage') %>
+    <%= render('shared/homepage') %>
 <% end %>

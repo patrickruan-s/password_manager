@@ -1,0 +1,9 @@
+<%= render_flash_stream %>
+<%= turbo_stream.remove(@entry) %>
+<%= turbo_stream.update('main-dashboard') do %>
+    <% if current_user.entries.any? %>
+        <%= render(partial: 'entries/main', locals: { entry: current_user.entries.first }) %>
+    <% else %>
+        <%= render(partial: 'entries/no_entries') %>
+    <% end %>
+<% end %>
